@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <form action="//api.menhood.wang/dplayerlist/dplayerlistget.php" method="post" name="dpform" style="display:none">
+            <input type="text" style="display:none" value="https://ddns.menhood.wang:2233/film/violet/zllyhhy/01.mp4" name="url" />
+            <input type="text" style="display:none" value="https://ddns.menhood.wang:2233/pic/violet/card-violet.jpg" name="pic" />
+            <input type="text" style="display:none" value="13" name="max" />
+            
+            <input type="text" style="display:none" value="100%" name="width" />
+            <input type="text" style="display:none" value="720px" name="height" />
+            <input type="text" style="display:none" value="false" name="autoplay" />
+            <input type="text" style="display:none" value="true" name="danmaku" />
+        </form>
+        <script type="text/javascript">
+        window.onload=function pgonload(){
+            document.dpform.submit();
+        }
+        </script>  
+    </body>
+</html>
