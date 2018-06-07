@@ -109,7 +109,7 @@ padding: 30px 20px 30px 25px;
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-info" onclick="copyurl()">复制网址</button>
-                                <a href="{$listname}.html" class="btn btn-info" ">访问测试</a>
+                                <a href="{$listname}.html" class="btn btn-info" target="_blank">访问测试</a>
                                 <hr>
                                 <div class="form-group" width=80% >
                                     <label for="url" class="col-sm-2 control-label">调用代码：</label>
