@@ -17,7 +17,7 @@
                     <nav class="navbar navbar-default" role="navigation">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                            </button> <a class="navbar-brand" href="#">API-Menhood</a>
+                            </button> <a class="navbar-brand" href="#">邻男</a>
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
@@ -29,18 +29,18 @@
                     <div class="row clearfix">
                         <div class="col-md-12 column">
                             	<h3 class="text-center">DPlayer播放列表生成</h3>
-                            	<h3 class="text-center">注意：<small>视频文件名必须是连续纯数字，如<strong style="color:pink">1.mp4</strong>、<strong style="color:pink" >2.mp4</strong>、<strong style="color:pink" >3.mp4</strong>……</small></h3>
-                            <form class="form-horizontal" role="form" action="generate/g.php" method="post" name="dpform" id="dpform">
+                            	<h3 class="text-center">注意：<small>视频文件名必须是连续纯数字，如<strong style="color:pink">01.mp4</strong>、<strong style="color:pink" >02.mp4</strong>、<strong style="color:pink" >03.mp4</strong>……</small></h3>
+                            <form class="form-horizontal" role="form" action="g.php" method="post" name="dpform" id="dpform">
                                 <div class="form-group">
                                     <label for="listname" class="col-sm-2 control-label">列表名称:</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" id="listname" type="text" value="" name="listname" placeholder="请输入列表名称，例如：王子变青蛙,重复提交可覆盖，请自定义名称时注意重复" />
+                                        <input class="form-control" id="listname" type="text" value="" name="listname" placeholder="请输入列表名称，例如：王子变青蛙" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="url" class="col-sm-2 control-label">视频地址:</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" id="url" type="text" value="" name="url" placeholder="请输入列表第一个视频的地址，暂不支持中文。如：http://ddns.menhood.wang/1.mp4" />
+                                        <input class="form-control" id="url" type="text" value="" name="url" placeholder="请输入列表第一个视频的地址，暂不支持中文。如：http://ddns.menhood.wang/01.mp4" />
                                     </div>
                                 </div>
                                 <div class="form-group">
