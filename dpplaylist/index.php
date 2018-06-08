@@ -1,5 +1,4 @@
 <?php
-
 //输出参数设置页面
 $index=
         <<<EOF
@@ -171,7 +170,7 @@ $width=$_POST['width'];//获取播放器div宽度
 $height=$_POST['height'];//获取播放器div高度
 $danmaku=$_POST['danmaku'];//获取是否开启弹幕
 $true='true';//用于判断弹幕开关
-$hosturl=str_replace("g.php","",'//'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']);//解析生成目录url
+$hosturl=str_replace("index.php","",'//'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']);//解析生成目录url
 //弹幕参数 可在此修改弹幕服务器地址及其他参数
 $danmakuoption=
 <<<EOF
@@ -232,6 +231,7 @@ $html=
 <script src="https://cdn.bootcss.com/flv.js/1.4.2/flv.min.js"></script>
 <script src="https://cdn.bootcss.com/hls.js/0.9.1/hls.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
 <style>
 body{margin:0;padding:0;}
 #dplayer2{
@@ -315,7 +315,8 @@ window.dp2 = new DPlayer({
     ]
 });
 //切换分P，并自动播放
-var ysrc = dp2.video.src;
+
+var ysrc = dp2.options.video.url;
 var ssrc;
 var flv='.flv';
 var mp4='.mp4';
@@ -330,7 +331,7 @@ function switchDPlayer(num) {
         ssrc = ysrc.replace(/[0-9]\d*.flv/i,nums+flv);
         break;
       case /[0-9]\d*.m3u8/i.test(ysrc):
-        src = ysrc.replace(/[0-9]\d*.m3u8/i,nums+m3u8);
+        ssrc = ysrc.replace(/[0-9]\d*.m3u8/i,nums+m3u8);
         break;
     }
 
@@ -340,7 +341,7 @@ function switchDPlayer(num) {
             pic: '{$dppic}',
             type: 'auto',
         }, {
-            id: '{$dpid}',
+            id: md5(ssrc),
             api: 'https://api.menhood.wang/dplayer',
             maximum: 3000,
             user: 'Menhood'
@@ -395,7 +396,7 @@ $result=
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li class="active"> <a href="/">返回首页</a>
+                                <li class="active"> <a href="javascript:history.go(-1)">返回</a>
                                 </li>
                                 <li > <a href="javascript:void(0)" onclick="varinfo()">Info</a>
                                 </li>
@@ -471,6 +472,7 @@ if($changebody == 'true'){$index = $result;}
         <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
         <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
+        <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
         <title>DPlayer列表生成</title>
     </head>
     <body>
