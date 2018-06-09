@@ -133,13 +133,6 @@ $index=
                         }
                     }
                 },
-                pic: {
-                    validators: {
-                        notEmpty: {
-                            message: 'pic地址不能为空'
-                        }
-                    }
-                },
                 max: {
                     validators: {
                         notEmpty: {
@@ -203,7 +196,9 @@ $height=$_POST['height'];
 if($height == null){
     $height='720px';
 }
-
+if ($dppic==null){
+    $dppic='';
+}
 //各种参数，用于查看赋值
 $dump='<br>$listname:'. $listname.'<br>$url:'. $dpurl.'<br>$pic:'. $dppic.'<br>$max:'. $dpmax.'<br>$autoplay:'. $dpautoplay.'<br>$danmaku:'. $danmaku.'<br>$width:'. $width.'<br>$height:'. $height;
 //生成播放列表，1-9数字前加0
@@ -467,6 +462,7 @@ if($changebody == 'true'){$index = $result;}
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
