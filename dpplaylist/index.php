@@ -319,13 +319,13 @@ var m3u8='.m3u8';
 function switchDPlayer(num) {
     var nums = String(num);
     switch (true) {
-      case /[0-9]\d*.MP4/i.test(ysrc):
+      case /\d*.MP4/i.test(ysrc):
         ssrc = ysrc.replace(/[0-9]\d*.MP4/i,nums+mp4);
         break;
-      case /[0-9]\d*.flv/i.test(ysrc):
+      case /\d*.flv/i.test(ysrc):
         ssrc = ysrc.replace(/[0-9]\d*.flv/i,nums+flv);
         break;
-      case /[0-9]\d*.m3u8/i.test(ysrc):
+      case /\d*.m3u8/i.test(ysrc):
         ssrc = ysrc.replace(/[0-9]\d*.m3u8/i,nums+m3u8);
         break;
     }
@@ -340,7 +340,7 @@ function switchDPlayer(num) {
             api: 'https://api.menhood.wang/dplayer',
             maximum: 3000,
             user: 'Menhood'
-        });
+        });ysrc=ssrc;
     }
     dp2.toggle();
 }
