@@ -1,4 +1,6 @@
+<meta charset="utf-8">
 <?php
+ini_set("error_reporting","E_ALL & ~E_NOTICE");
 //输出参数设置页面
 $index=
         <<<EOF
@@ -206,12 +208,12 @@ for ($i=1;$i<=$dpmax;$i++){
     if($i<10){
 		     $dplistli=
 		     <<<EOF
-		     {$dplistli}<a href="javascript:void(0)" onclick="switchDPlayer('0{$i}')" ><li><span>P{$i}</span></li></a>
+		     {$dplistli}<a href="javascript:void(0)" onclick="switchDPlayer('0{$i}')" ><li id="p0{$i}"><span>P{$i}</span></li></a>
 EOF;
 }else{
             $dplistli=
             <<<EOF
-            {$dplistli}<a href="javascript:void(0)" onclick="switchDPlayer({$i})" ><li><span>P{$i}</span></li></a>
+            {$dplistli}<a href="javascript:void(0)" onclick="switchDPlayer({$i})" ><li id="p{$i}"><span>P{$i}</span></li></a>
 EOF;
 }
 }
@@ -246,6 +248,10 @@ padding: 6px;
 margin:5px;
 }
 .button:hover{
+   border: 1px solid #00a1d6; 
+   color:#00a1d6;
+}
+.playing{
    border: 1px solid #00a1d6; 
    color:#00a1d6;
 }
@@ -316,17 +322,18 @@ var ssrc;
 var flv='.flv';
 var mp4='.mp4';
 var m3u8='.m3u8';
+var nums='';
 function switchDPlayer(num) {
     var nums = String(num);
     switch (true) {
       case /\d*.MP4/i.test(ysrc):
-        ssrc = ysrc.replace(/[0-9]\d*.MP4/i,nums+mp4);
+        ssrc = ysrc.replace(/\d*.MP4/i,nums+mp4);
         break;
       case /\d*.flv/i.test(ysrc):
-        ssrc = ysrc.replace(/[0-9]\d*.flv/i,nums+flv);
+        ssrc = ysrc.replace(/\d*.flv/i,nums+flv);
         break;
       case /\d*.m3u8/i.test(ysrc):
-        ssrc = ysrc.replace(/[0-9]\d*.m3u8/i,nums+m3u8);
+        ssrc = ysrc.replace(/\d*.m3u8/i,nums+m3u8);
         break;
     }
 
@@ -340,8 +347,19 @@ function switchDPlayer(num) {
             api: 'https://api.menhood.wang/dplayer',
             maximum: 3000,
             user: 'Menhood'
-        });ysrc=ssrc;
-    }
+        });
+		document.getElementById('p'+nums).className="playing";
+		ysrc=ssrc;
+    }else{
+		for(var i=1;i<1000;i++){
+			if(i<10){
+				i='0'+i;
+				document.getElementById('p'+i).className="";
+			}else{
+				document.getElementById('p'+i).className="";
+			};
+		};
+	};
     dp2.toggle();
 }
 //显示/隐藏播放列表
