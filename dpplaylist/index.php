@@ -252,6 +252,7 @@ margin:5px;
    color:#00a1d6;
 }
 .playing{
+   box-sizing: border-box;
    border: 1px solid #00a1d6; 
    color:#00a1d6;
 }
