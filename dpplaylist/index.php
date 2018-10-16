@@ -224,11 +224,11 @@ $html=
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" href="https://cdn.bootcss.com/dplayer/1.22.2/DPlayer.min.css">
-<script src="https://cdn.bootcss.com/flv.js/1.4.2/flv.min.js"></script>
-<script src="https://cdn.bootcss.com/hls.js/0.9.1/hls.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/dplayer/1.22.2/DPlayer.min.css">
+<script src="https://cdnjs.loli.net/ajax/libs/flv.js/1.4.2/flv.min.js"></script>
+<script src="https://cdnjs.loli.net/ajax/libs/hls.js/0.9.1/hls.min.js"></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.loli.net/ajax/libs/blueimp-md5/2.10.0/js/md5.min.js"></script>
 <style>
 body{margin:0;padding:0;}
 #dplayer2{
@@ -294,7 +294,7 @@ margin:5px;
 <body>
 <div id="dplayer2" class="dplayer dplayer-arrow"></div>
 
-<script src="https://cdn.bootcss.com/dplayer/1.22.2/DPlayer.min.js"></script>
+<script src="https://cdnjs.loli.net/ajax/libs/dplayer/1.22.2/DPlayer.min.js"></script>
 <script>
 //生成播放器
 window.dp2 = new DPlayer({
@@ -482,12 +482,12 @@ if($changebody == 'true'){$index = $result;}
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
-        <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
-        <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdnjs.loli.net/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="https://cdnjs.loli.net/ajax/libs/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
+        <script src="https://cdnjs.loli.net/ajax/libs/0.5.3/js/bootstrapValidator.min.js"></script>
+        <script src="https://cdnjs.loli.net/ajax/libs/blueimp-md5/2.10.0/js/md5.min.js"></script>
         <title>DPlayer列表生成</title>
     </head>
     <body>
