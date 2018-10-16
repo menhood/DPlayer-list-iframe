@@ -5,7 +5,7 @@
 ## 下载
 可以点击[这里](https://github.com/menhood/DPlayer-list-iframe/releases/download/1.1/DPlayer-list-iframe-test-v1.1.zip)下载
 
-也可以点击右上角`clone and download` 下载zip文件
+也可以点击右上角`Clone or download` 下载zip文件
 ## 使用
 不知道把什么东西推上来了……瑟瑟发抖
 
