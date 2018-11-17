@@ -10,7 +10,7 @@ $index=
                     <nav class="navbar navbar-default" role="navigation">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                            </button> <a class="navbar-brand" href="#">邻男</a>
+                            </button> <a class="navbar-brand" href="#">iframe生成</a>
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
@@ -22,7 +22,7 @@ $index=
                     <div class="row clearfix">
                         <div class="col-md-12 column">
                             	<h3 class="text-center">DPlayer播放列表生成</h3>
-                            	<h3 class="text-center">注意：<small>视频文件名必须是连续纯数字，如<strong style="color:pink">01.mp4</strong>、<strong style="color:pink" >02.mp4</strong>、<strong style="color:pink" >03.mp4</strong>……</small></h3>
+                            	<h3 class="text-center">注意：<small>视频文件名必须是连续纯数字，如<strong style="color:pink">01.mp4</strong>、<strong style="color:pink" >02.mp4</strong>、<strong style="color:pink" >03.mp4</strong>……</small>只支持<strong style="color:red" >MP4</strong>文件</h3>
                             <form class="form-horizontal" role="form" action="" method="post" name="dpform" id="dpform">
                                 <div class="form-group">
                                     <label for="listname" class="col-sm-2 control-label">列表名称:</label>
@@ -33,7 +33,7 @@ $index=
                                 <div class="form-group">
                                     <label for="url" class="col-sm-2 control-label">视频地址:</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" id="url" type="text" value="" name="url" placeholder="请输入列表第一个视频的地址，暂不支持中文。如：http://ddns.menhood.wang/01.mp4" />
+                                        <input class="form-control" id="url" type="text" value="" name="url" placeholder="请输入列表视频的目录地址，暂不支持中文。如：https://menhood.320.io/?/%E5%8A%A8%E6%BC%AB/VioletEvergarden/zllyhhy/" />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -111,14 +111,12 @@ $index=
         }
          $(function () {  
         $('#dpform').bootstrapValidator({
-
 　　　　　　　　message: '内容无效！',
             　feedbackIcons: {
                 　　　　　　　　valid: 'glyphicon glyphicon-ok',
                 　　　　　　　　invalid: 'glyphicon glyphicon-remove',
                 　　　　　　　　validating: 'glyphicon glyphicon-refresh'
             　　　　　　　　   },
-
             fields: {
                 listname: {
                     message: '列表名称验证失败',
@@ -148,7 +146,6 @@ $index=
          });
         </script>    
 EOF;
-
 //准备工作 定义变量 获取传入参数
 header('Access-Control-Allow-Origin:*'); 
 date_default_timezone_set('PRC');//定义时区
@@ -174,7 +171,7 @@ danmaku: {
             api: 'https://api.menhood.wang/dplayer',
             token: 'tokendemo',
             maximum: 3000,
-            user: 'Menhood',
+            user: cip,
             bottom: '15%',
             unlimited: true
         },
@@ -202,21 +199,27 @@ if ($dppic==null){
     $dppic='';
 }
 //各种参数，用于查看赋值
-$dump='<br>$listname:'. $listname.'<br>$url:'. $dpurl.'<br>$pic:'. $dppic.'<br>$max:'. $dpmax.'<br>$autoplay:'. $dpautoplay.'<br>$danmaku:'. $danmaku.'<br>$width:'. $width.'<br>$height:'. $height;
+$dump='<br>$listname:'. $listname.'<br>$url:'. $dpurl.'<br>$pic:'. $dppic.'<br>$max:'. $dpmax.'<br>$autoplay:'. $dpautoplay.'<br>$danmaku:'. $danmaku.'<br>$width:'. $width.'<br>$height:'. $height.'<br>$playlistarr:'. var_dump($playlistarr);
+
+$suffix=".mp4";
+for ($n=1;$n<=$dpmax;$n++){
+    if ($n<10){
+        $playlistarr=$playlistarr.'"'.$dpurl.'0'.$n.$suffix.'",';
+    }else {
+        $playlistarr=$playlistarr.'"'.$dpurl.$n.$suffix.'",';
+    } 
+}
+$playlistarr="[".rtrim($playlistarr, ',')."]";
+$playlistarr=str_replace("/","\/",$playlistarr);
 //生成播放列表，1-9数字前加0
-for ($i=1;$i<=$dpmax;$i++){
-    if($i<10){
+for ($i=0;$i<$dpmax;$i++){
+        $pn=$i+1;
 		     $dplistli=
 		     <<<EOF
-		     {$dplistli}<a href="javascript:void(0)" onclick="switchDPlayer('0{$i}')" ><li id="p0{$i}"><span>P{$i}</span></li></a>
-EOF;
-}else{
-            $dplistli=
-            <<<EOF
-            {$dplistli}<a href="javascript:void(0)" onclick="switchDPlayer({$i})" ><li id="p{$i}"><span>P{$i}</span></li></a>
+		     {$dplistli} \n <a href="javascript:void(0)" onclick="switchDPlayer('{$i}')" ><li id="p{$i}"><span>P{$pn}</span></li></a>
 EOF;
 }
-}
+$dpurl=$dpurl."01".$suffix;
 //播放器页面参数
 $html= 
         <<<EOF
@@ -293,8 +296,8 @@ margin:5px;
 </head>
 <body>
 <div id="dplayer2" class="dplayer dplayer-arrow"></div>
-
 <script src="https://cdnjs.loli.net/ajax/libs/dplayer/1.22.2/DPlayer.min.js"></script>
+<script src="https://api.menhood.wang/getcip/getcipv2.php"></script>
 <script>
 //生成播放器
 window.dp2 = new DPlayer({
@@ -317,27 +320,13 @@ window.dp2 = new DPlayer({
     ]
 });
 //切换分P，并自动播放
-
+var list={$playlistarr};
 var ysrc = dp2.options.video.url;
 var ssrc;
-var flv='.flv';
-var mp4='.mp4';
-var m3u8='.m3u8';
 var nums='';
 function switchDPlayer(num) {
-    var nums = String(num);
-    switch (true) {
-      case /\d*.MP4/i.test(ysrc):
-        ssrc = ysrc.replace(/\d*.MP4/i,nums+mp4);
-        break;
-      case /\d*.flv/i.test(ysrc):
-        ssrc = ysrc.replace(/\d*.flv/i,nums+flv);
-        break;
-      case /\d*.m3u8/i.test(ysrc):
-        ssrc = ysrc.replace(/\d*.m3u8/i,nums+m3u8);
-        break;
-    }
-
+    ssrc = list[num];
+    var nums = num;
     if (ssrc !== ysrc) {
         dp2.switchVideo({
             url: ssrc,
@@ -349,18 +338,9 @@ function switchDPlayer(num) {
             maximum: 3000,
             user: 'Menhood'
         });
-		document.getElementById('p'+nums).className="playing";
 		ysrc=ssrc;
-    }else{
-		for(var i=1;i<1000;i++){
-			if(i<10){
-				i='0'+i;
-				document.getElementById('p'+i).className="";
-			}else{
-				document.getElementById('p'+i).className="";
-			};
-		};
-	};
+    };
+    document.getElementById('p'+nums).className="playing";
     dp2.toggle();
 }
 //显示/隐藏播放列表
@@ -378,14 +358,11 @@ $(function(){
             });
         });
 </script>
-
 <input type="button" id="ShowButton_2" name="ShowButton_2" value="选择集数" class="button">
 <ul class="dplistul" id="dplistuls">{$dplistli}</ul>
 </body>
 </html>
 EOF;
-
-
 //生成播放页面
 $myfile = fopen(__DIR__.'/'.'generate'.'/'.$listname.".html", "w") or die("Unable to open file!");
 fwrite($myfile, $html);
@@ -406,7 +383,6 @@ $result=
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                             </button> <a class="navbar-brand" href="/">邻男</a>
-
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
